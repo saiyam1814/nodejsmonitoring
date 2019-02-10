@@ -21,6 +21,9 @@ app.get('/test', function(req, res) {
     res.status(200).json({status:true});
 });
 
+app.get('/hello', function(req, res) {
+    res.send("Welcome to the monitoring world");
+});
 
 var port = process.env.PORT || 3000;
 // app.listen(port, function () {

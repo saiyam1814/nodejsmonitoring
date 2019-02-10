@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodemon-service
+spec:
+  selector:
+    app: nodemon
+  type: NodePort
+  ports:
+    - port: 3000
+      targetPort: 3000
+      nodePort: 8001
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: nodemon
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nodemon
+      annotations:
+            prometheus.io/scrape: "true"
+            prometheus.io/path: 'swagger-stats/metrics'
+            prometheus.io/port: "3000"
+    spec:
+      containers:
+        - name: nodemon
+          image: saiyam911/nodemonitoring:2.0
+          ports:
+            - containerPort: 3000
