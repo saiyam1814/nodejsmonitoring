@@ -1,0 +1,11 @@
+apiVersion: ignite.weave.works/v1alpha1
+kind: VM
+metadata:
+  name: test-vm
+spec:
+  image:
+    ociClaim:
+      ref: saiyam911/nodemonitoring
+  cpus: 2
+  diskSize: 3GB
+  memory: 800MB
